@@ -11,7 +11,7 @@ ArrayList* arraylist_append(ArrayList *array_list, int new_element) {
     }
 
     if (array_list->size == array_list->capacity) {
-        aux_pointer = realloc(array_list->pointer, sizeof(*array_list->pointer) * 2);
+        aux_pointer = realloc(array_list->pointer, array_list->capacity * sizeof(*array_list->pointer) * 2);
         array_list->capacity *= 2;
     }
 
@@ -19,6 +19,7 @@ ArrayList* arraylist_append(ArrayList *array_list, int new_element) {
         return NULL;
     }
 
+    array_list->pointer = aux_pointer;
     array_list->pointer[array_list->size] = new_element;
     array_list->size++;
 
