@@ -4,6 +4,7 @@ typedef struct {
     int *pointer;
 } ArrayList;
 
+ArrayList* arraylist_init(unsigned capacity);
 ArrayList* arraylist_append(ArrayList *array_list, int new_element);
 ArrayList* arraylist_insert(ArrayList *array_list, int new_element, unsigned position);
 ArrayList* arraylist_update(ArrayList *array_list, int new_element, unsigned position);

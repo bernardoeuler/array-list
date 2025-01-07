@@ -3,6 +3,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+ArrayList* arraylist_init(unsigned capacity) {
+    ArrayList* array_list = malloc(sizeof(ArrayList));
+
+    array_list->capacity = capacity;
+    array_list->size = 0;
+    array_list->pointer = calloc(capacity, sizeof(*array_list->pointer));
+
+    return array_list;
+}
+
 ArrayList* arraylist_append(ArrayList *array_list, int new_element) {
     int* aux_pointer = array_list->pointer;
 
