@@ -36,7 +36,31 @@ ArrayList* arraylist_append(ArrayList *array_list, int new_element) {
     return array_list;
 }
 
-ArrayList* arraylist_insert(ArrayList *array_list, int new_element, unsigned position) {}
+ArrayList* arraylist_insert(ArrayList *array_list, int new_element, unsigned position) {
+    int* aux_pointer = array_list->pointer;
+    unsigned last_index = array_list->size - 1;
+
+    if (array_list->size == 0 || array_list->size == position) {
+        return arraylist_append(array_list, new_element);
+    }
+
+    if (array_list->size == array_list->capacity) {
+        aux_pointer = realloc(array_list->pointer, array_list->capacity * sizeof(*array_list->pointer) * 2);
+        array_list->capacity *= 2;
+    }
+
+    if (!aux_pointer) {
+        return NULL;
+    }
+
+    for (unsigned i = 0; i < array_list->size - position; i++) {
+        array_list->pointer[last_index - i + 1] = array_list->pointer[last_index - i];
+    }
+
+    array_list->pointer[position] = new_element;
+
+    return array_list;
+}
 ArrayList* arraylist_update(ArrayList *array_list, int new_element, unsigned position) {}
 ArrayList* arraylist_delete(ArrayList *array_list, int new_element, unsigned position) {}
 ArrayList* arraylist_print(ArrayList *array_list) {}
